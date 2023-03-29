@@ -15,12 +15,12 @@ const root = ReactDOM.createRoot(
 
 const router = createBrowserRouter([
   {
-    path: "/ecommerce-admin/",
+    path: "/",
     element: <App />,
     errorElement: <Error />,
   },
   {
-    path: "/ecommerce-admin/home/",
+    path: "/home",
     element: <Home />,
   },
 ]);
