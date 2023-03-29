@@ -1,0 +1,39 @@
+.login {
+  height: 100vh;
+  width: 100vw;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+
+  &__input {
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+
+  &__button {
+    padding: 10px;
+    width: 100px;
+  }
+
+  &__error {
+    margin-top: 24px;
+    font-style: italic;
+    visibility: hidden;
+
+    &--true {
+      visibility: visible;
+    }
+  }
+}
+
+.logo {
+  margin-bottom: 48px;
+
+  font-weight: bold;
+  font-size: 30px;
+  color: darkblue;
+}
