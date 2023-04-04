@@ -46,7 +46,7 @@ export const Topbar: React.FC = React.memo(
             </div>
 
             <img
-              src={currentUser?.image || "dscscsc"}
+              src={currentUser?.image}
               alt=""
               className="topAvatar"
               />

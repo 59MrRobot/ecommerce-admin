@@ -12,6 +12,7 @@ interface User {
   country: string;
   number: string;
   createdAt: string;
+  accessToken: string;
 }
 
 interface Order {

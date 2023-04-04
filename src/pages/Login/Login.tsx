@@ -60,7 +60,9 @@ export const Login: React.FC = React.memo(
 
         <button className="login__button" onClick={handleClick}>Login</button>
 
-        <span className={`login__error login__error--${showError}`}>You are not authorised to login.</span>
+        <span className={`login__error login__error--${showError}`}>
+          You are not authorised to login.
+        </span>
       </div>
     )
   }
