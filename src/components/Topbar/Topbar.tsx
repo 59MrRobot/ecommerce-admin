@@ -4,17 +4,17 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import LanguageIcon from '@mui/icons-material/Language';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-// import { logout } from "../../redux/userRedux";
+import { logout } from "../../redux/userRedux";
 
 export const Topbar: React.FC = React.memo(
   () => {
     const currentUser: User = useSelector((state: any) => state.user.currentUser);
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     const handleClick = () => {
-      // dispatch(logout(false));
+      dispatch(logout());
     }
 
     return (
@@ -46,7 +46,7 @@ export const Topbar: React.FC = React.memo(
             </div>
 
             <img
-              src={currentUser.image}
+              src={currentUser?.image || "dscscsc"}
               alt=""
               className="topAvatar"
               />

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import "./Login.scss";
 import { useDispatch } from "react-redux";
 import { login } from '../../redux/apiCalls.js';
 import { useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 
 export const Login: React.FC = React.memo(
   () => {
@@ -10,6 +11,7 @@ export const Login: React.FC = React.memo(
     const dispatch = useDispatch();
     const user = useSelector((state: any) => state.user.currentUser);
     const [showError, setShowError] = useState(false);
+    const navigate = useNavigate();
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setLoginCredentials((prev) => ({
@@ -20,7 +22,7 @@ export const Login: React.FC = React.memo(
       setShowError(false);
     }
 
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const handleClick = useCallback((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       event.preventDefault();
 
       login(dispatch, loginCredentials);
@@ -28,7 +30,13 @@ export const Login: React.FC = React.memo(
       if (user && !user.isAdmin) {
         setShowError(true);
       }
-    }
+    }, [dispatch, loginCredentials, user])
+
+    useEffect(() => {
+      if (user && user.isAdmin) {
+        navigate("/")
+      }
+    }, [navigate, user]);
 
     return (
       <div className="login">

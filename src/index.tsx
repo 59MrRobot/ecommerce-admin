@@ -24,7 +24,7 @@ const router = createHashRouter([
     errorElement: <Error />,
   },
   {
-    path: "/login",
+    path: "/auth/login",
     element: <Login />,
   },
 ]);
