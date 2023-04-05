@@ -4,9 +4,6 @@ import './Error.scss';
 
 export const Error: React.FC = React.memo(
   () => {
-    // const error: any = useRouteError();
-    // console.error(error);
-
     return (
       <div id="error-page" className="error">
         <div className="error__wrapper">

@@ -8,6 +8,8 @@ import {
   getProductSuccess,
   deleteProductFailure,
   deleteProductSuccess,
+  updateProductSuccess,
+  updateProductFailure,
    } from "./productsRedux";
 
 import {
@@ -51,5 +53,17 @@ export const deleteProduct = async (dispatch, id) => {
     dispatch(deleteProductSuccess(response.data._id));
   } catch (error) {
     dispatch(deleteProductFailure());
+  }
+}
+
+export const updateProduct = async (dispatch, id, updatedProduct) => {
+  dispatch(startProductProcess());
+
+  try {
+    const response = await userRequest.put(`/products/${id}`, updatedProduct);
+
+    dispatch(updateProductSuccess({ id, response }));
+  } catch (error) {
+    dispatch(updateProductFailure());
   }
 }

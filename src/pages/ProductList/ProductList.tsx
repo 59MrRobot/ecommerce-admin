@@ -16,6 +16,7 @@ export const ProductList: React.FC = React.memo(
       pageSize: 8,
       page: 0,
     });
+    const [editProduct, setEditProduct] = useState("");
 
     useEffect(() => {
       getProducts(dispatch);
@@ -54,7 +55,12 @@ export const ProductList: React.FC = React.memo(
           return (
             <>
               <Link to={"/product/" + params.row._id}>
-                <button className="productListEdit">Edit</button>
+                <button
+                  className="productListEdit"
+                  onClick={() => setEditProduct(params.row._id)}
+                >
+                  Edit
+                </button>
               </Link>
 
               <DeleteOutlineIcon
@@ -74,7 +80,15 @@ export const ProductList: React.FC = React.memo(
             rows={products}
             disableRowSelectionOnClick
             columns={columns}
-            getRowId={(row: any) => row ? (row._id) : 0}
+            getRowId={(row: Product) => {
+              if (row) {
+                return row._id;
+              } else {
+                getProducts(dispatch);
+
+                return editProduct;
+              }
+            }}
             paginationModel={paginationModel}
             onPaginationModelChange={setPaginationModel}
             checkboxSelection
