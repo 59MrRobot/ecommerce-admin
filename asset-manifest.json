@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.css": "/ecommerce-admin/static/css/main.dc4abeee.css",
-    "main.js": "/ecommerce-admin/static/js/main.7bdf73fa.js",
+    "main.css": "/ecommerce-admin/static/css/main.f9c37e97.css",
+    "main.js": "/ecommerce-admin/static/js/main.146beb0e.js",
     "index.html": "/ecommerce-admin/index.html"
   },
   "entrypoints": [
-    "static/css/main.dc4abeee.css",
-    "static/js/main.7bdf73fa.js"
+    "static/css/main.f9c37e97.css",
+    "static/js/main.146beb0e.js"
   ]
 }
