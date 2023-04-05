@@ -18,6 +18,16 @@ import {
   startUserProcess,
   loginFailure,
   loginSuccess,
+  getUsersSuccess,
+  getUsersFailure,
+  getUserSuccess,
+  getUserFailure,
+  updateUserSuccess,
+  updateUserFailure,
+  deleteUserSuccess,
+  deleteUserFailure,
+  addUserSuccess,
+  addUserFailure,
 } from "./userRedux"
 
 //USERS
@@ -30,6 +40,66 @@ export const login = async (dispatch, user) => {
     dispatch(loginSuccess(response.data));
   } catch (error) {
     dispatch(loginFailure());
+  }
+}
+
+export const getUsers = async (dispatch) => {
+  dispatch(startUserProcess());
+
+  try {
+    const response = await userRequest.get('/users');
+
+    dispatch(getUsersSuccess(response.data));
+  } catch (error) {
+    dispatch(getUsersFailure());
+  }
+}
+
+export const getUser = async (dispatch, id) => {
+  dispatch(startUserProcess());
+
+  try {
+    const response = await userRequest.get(`/users/find/${id}`);
+
+    dispatch(getUserSuccess(response.data));
+  } catch (error) {
+    dispatch(getUserFailure());
+  }
+}
+
+export const updateUser = async (dispatch, id, updatedUser) => {
+  dispatch(startUserProcess());
+
+  try {
+    const response = await userRequest.put(`/users/${id}`, updatedUser);
+
+    dispatch(updateUserSuccess({ id, updatedUser: response }));
+  } catch (error) {
+    dispatch(updateUserFailure());
+  }
+}
+
+export const deleteUser = async (dispatch, id) => {
+  dispatch(startUserProcess());
+
+  try {
+    const response = await userRequest.delete(`/users/${id}`);
+
+    dispatch(deleteUserSuccess(response.data._id));
+  } catch (error) {
+    dispatch(deleteUserFailure());
+  }
+}
+
+export const addUser = async (dispatch, newUser) => {
+  dispatch(startUserProcess());
+
+  try {
+    const response = await userRequest.post("/auth/register", newUser);
+
+    dispatch(addUserSuccess(response.data));
+  } catch (error) {
+    dispatch(addUserFailure());
   }
 }
 
