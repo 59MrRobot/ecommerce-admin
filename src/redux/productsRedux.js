@@ -70,6 +70,7 @@ export const {
   updateProductFailure,
   addProductSuccess,
   addProductFailure,
+  setReload,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

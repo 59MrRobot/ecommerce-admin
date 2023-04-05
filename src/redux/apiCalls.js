@@ -10,6 +10,8 @@ import {
   deleteProductSuccess,
   updateProductSuccess,
   updateProductFailure,
+  addProductSuccess,
+  addProductFailure,
    } from "./productsRedux";
 
 import {
@@ -65,5 +67,17 @@ export const updateProduct = async (dispatch, id, updatedProduct) => {
     dispatch(updateProductSuccess({ id, response }));
   } catch (error) {
     dispatch(updateProductFailure());
+  }
+}
+
+export const addProduct = async (dispatch, newProduct) => {
+  dispatch(startProductProcess());
+
+  try {
+    const response = await userRequest.post("/products", newProduct);
+
+    dispatch(addProductSuccess(response.data));
+  } catch (error) {
+    dispatch(addProductFailure());
   }
 }
