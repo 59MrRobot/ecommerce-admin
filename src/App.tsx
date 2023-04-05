@@ -11,6 +11,7 @@ import {
 import { Home } from './pages/Home';
 import { Login } from './pages/Login';
 import { useSelector } from 'react-redux';
+import { ProductList } from './pages/ProductList';
 
 function App() {
   const user: User = useSelector((state: any) => state.user.currentUser);
@@ -27,9 +28,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Root />}>
           <Route index element={<Home />} />
+          <Route path="/products" element={<ProductList />} />
           {/* <Route path="/user/:userId" element={<User />} />
           <Route path="/newUser" element={<NewUser />} />
-          <Route path="/products" element={<ProductList />} />
+          
           <Route path="/product/:productId" element={<Product />} />
           <Route path="/newProduct" element={<NewProduct />} /> */}
         </Route>
