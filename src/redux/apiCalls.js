@@ -73,7 +73,7 @@ export const updateUser = async (dispatch, id, updatedUser) => {
   try {
     const response = await userRequest.put(`/users/${id}`, updatedUser);
 
-    dispatch(updateUserSuccess({ id, updatedUser: response }));
+    dispatch(updateUserSuccess({ id, updatedUser: response.data }));
   } catch (error) {
     dispatch(updateUserFailure());
   }
@@ -134,7 +134,7 @@ export const updateProduct = async (dispatch, id, updatedProduct) => {
   try {
     const response = await userRequest.put(`/products/${id}`, updatedProduct);
 
-    dispatch(updateProductSuccess({ id, response }));
+    dispatch(updateProductSuccess({ id, updatedProduct: response.data }));
   } catch (error) {
     dispatch(updateProductFailure());
   }

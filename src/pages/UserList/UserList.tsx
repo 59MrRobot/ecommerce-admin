@@ -1,7 +1,7 @@
 import "./UserList.scss";
 import { DataGrid } from '@mui/x-data-grid';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUser, getUsers } from "../../redux/apiCalls";
@@ -15,12 +15,11 @@ export const UserList: React.FC = React.memo(
       pageSize: 8,
       page: 0,
     });
+    const [editUser, setEditUser] = useState("");
     const dispatch = useDispatch();
-    // const navigate = useNavigate();
 
     const handleDelete = (id: number) => {
       deleteUser(dispatch, id);
-      // navigate(0);
     };
 
     useEffect(() => {
@@ -61,7 +60,12 @@ export const UserList: React.FC = React.memo(
           return (
             <>
               <Link to={"/user/" + params.row._id}>
-                <button className="userListEdit">Edit</button>
+                <button
+                  className="userListEdit"
+                  onClick={() => setEditUser(params.row._id)}
+                  >
+                    Edit
+                  </button>
               </Link>
               
               <DeleteOutlineIcon
@@ -81,7 +85,15 @@ export const UserList: React.FC = React.memo(
             rows={users}
             disableRowSelectionOnClick
             columns={columns}
-            getRowId={(row: any) => row ? row._id : 0}
+            getRowId={(row: Product) => {
+              if (row) {
+                return row._id;
+              } else {
+                getUsers(dispatch);
+
+                return editUser;
+              }
+            }}
             paginationModel={paginationModel}
             onPaginationModelChange={setPaginationModel}
             checkboxSelection

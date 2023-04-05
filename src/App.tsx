@@ -16,6 +16,7 @@ import { Error } from './pages/Error';
 import { Product } from './pages/Product';
 import { NewProduct } from './pages/NewProduct';
 import { UserList } from './pages/UserList';
+import { User } from './pages/User';
 
 function App() {
   const user: User = useSelector((state: any) => state.user.currentUser);
@@ -36,9 +37,8 @@ function App() {
           <Route path="/product/:productId" element={<Product />} />
           <Route path="/newProduct" element={<NewProduct />} />
           <Route path="/users" element={<UserList />} />
-          {/* <Route path="/user/:userId" element={<User />} />
-          <Route path="/newUser" element={<NewUser />} />
-           */}
+          <Route path="/user/:userId" element={<User />} />
+          {/* <Route path="/newUser" element={<NewUser />} /> */}
         </Route>
         <Route path="/auth/login" element={<Login />} />
         <Route path="*" element={<Error />} />

@@ -94,7 +94,7 @@ export const Product: React.FC = React.memo(
       ));
     };
 
-    const handleUpload = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const handleUpload = () => {
       if (file) {
         const fileName = new Date().getTime() + file!.name;
         const storage = getStorage(app);
