@@ -54,10 +54,11 @@ const userSlice = createSlice({
     },
     //DELETE
     deleteUserSuccess: (state, action) => {
-      const userIndex = state.users.findIndex(user => user._id === action.payload.id);
-
-      state.users[userIndex] = action.payload.updatedUser;
-      state.isFetching = false;
+      state.users.splice(
+        state.users.findIndex(user => user._id === action.payload),
+        1,
+     );
+     state.isFetching = false;
     },
     deleteUserFailure: (state) => {
       state.isFetching = false;
