@@ -2,16 +2,17 @@ import React, { useEffect } from 'react';
 import './App.scss';
 import { Topbar } from './components/Topbar';
 import { Sidebar } from './components/Sidebar';
-import { 
-  Route,
+import {
   Outlet,
+  useNavigate,
   Routes,
-  useNavigate
+  Route
 } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { Login } from './pages/Login';
 import { useSelector } from 'react-redux';
 import { ProductList } from './pages/ProductList';
+import { Error } from './pages/Error';
 
 function App() {
   const user: User = useSelector((state: any) => state.user.currentUser);
@@ -26,7 +27,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Root />}>
+        <Route path="/" element={<Root />} errorElement={<Error />}>
           <Route index element={<Home />} />
           <Route path="/products" element={<ProductList />} />
           {/* <Route path="/user/:userId" element={<User />} />
@@ -35,8 +36,8 @@ function App() {
           <Route path="/product/:productId" element={<Product />} />
           <Route path="/newProduct" element={<NewProduct />} /> */}
         </Route>
-
         <Route path="/auth/login" element={<Login />} />
+        <Route path="*" element={<Error />} />
       </Routes>
     </div>
   );
