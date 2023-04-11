@@ -4,23 +4,28 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import { userRequest } from "../../requestMethods";
 import { useSelector } from "react-redux";
+import { Loader } from "../Loader";
 
 export const FeaturedInfo: React.FC = React.memo(
   () => {
     const [percentage, setPercentage] = useState(0);
     const [lastIncome, setLastIncome] = useState(0);
+    const [isFetching, setIsFetching] = useState(false);
     const user = useSelector((state: any) => state.user.currentUser);
 
     useEffect(() => {
       const getIncome = async () => {
         try {
+          setIsFetching(true);
+
           const response = await userRequest.get("orders/income");
           const perc = (response.data[1].total) / (response.data[0].total) * 100;
 
           setLastIncome(response.data[1].total);
           setPercentage(Math.round(perc * 10) / 10);
+          setIsFetching(false);
         } catch (error) {
-
+          console.log(error);
         }
       }
 
@@ -32,19 +37,26 @@ export const FeaturedInfo: React.FC = React.memo(
         <div className="featuredItem">
           <span className="featuredTitle">Revenue</span>
 
-          <div className="featuredMoneyContainer">
-            <span className="featuredMoney">${lastIncome}</span>
+          {isFetching
+            ? (<Loader />)
+            : (
+              <>
+                <div className="featuredMoneyContainer">
+                  <span className="featuredMoney">${lastIncome}</span>
 
-            <span className="featuredMoneyRate">
-              %{percentage}
-              {(percentage < 0)
-                ? (<ArrowDownwardIcon className="featuredIcon negative" />)
-                : (<ArrowUpwardIcon className="featuredIcon positive" />)
-              }
-            </span>
-          </div>
+                  <span className="featuredMoneyRate">
+                    %{percentage}
+                    {(percentage < 0)
+                      ? (<ArrowDownwardIcon className="featuredIcon negative" />)
+                      : (<ArrowUpwardIcon className="featuredIcon positive" />)
+                    }
+                  </span>
+                </div>
 
-          <span className="featuredSub">Compared to last month</span>
+                <span className="featuredSub">Compared to last month</span>
+              </>
+            )
+          }
         </div>
 
         <div className="featuredItem">

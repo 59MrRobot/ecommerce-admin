@@ -4,12 +4,14 @@ import { useDispatch } from "react-redux";
 import { login } from '../../redux/apiCalls.js';
 import { useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
+import { Loader } from '../../components/Loader';
 
 export const Login: React.FC = React.memo(
   () => {
     const [loginCredentials, setLoginCredentials] = useState({});
     const dispatch = useDispatch();
     const user = useSelector((state: any) => state.user.currentUser);
+    const isFetching = useSelector((state: any) => state.user.isFetching);
     const [showError, setShowError] = useState(false);
     const navigate = useNavigate();
 
@@ -34,7 +36,7 @@ export const Login: React.FC = React.memo(
 
     useEffect(() => {
       if (user && user.isAdmin) {
-        navigate("/")
+        navigate("/");
       }
     }, [navigate, user]);
 
@@ -59,6 +61,8 @@ export const Login: React.FC = React.memo(
         />
 
         <button className="login__button" onClick={handleClick}>Login</button>
+
+        {isFetching && (<Loader />)}
 
         <span className={`login__error login__error--${showError}`}>
           You are not authorised to login.

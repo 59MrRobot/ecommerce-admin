@@ -5,6 +5,7 @@ import { WidgetSm } from "../../components/WidgetSm";
 import { WidgetLg } from "../../components/WidgetLg";
 import React, { useEffect, useMemo, useState } from "react";
 import { userRequest } from "../../requestMethods";
+import { Loader } from "../../components/Loader";
 
 export const Home: React.FC = React.memo(
   () => {
@@ -13,6 +14,7 @@ export const Home: React.FC = React.memo(
       name: string;
       "Active User": number,
     }[]>([]);
+    const [isFetching, setIsFetching] = useState(false);
 
     const MONTHS = useMemo(
       () => [
@@ -35,6 +37,8 @@ export const Home: React.FC = React.memo(
     useEffect(() => {
       const getStats = async () => {
         try {
+          setIsFetching(true);
+
           const response = await userRequest.get('users/stats');
 
           response.data.map((stat: UserStat) => {
@@ -48,9 +52,11 @@ export const Home: React.FC = React.memo(
             ])
 
             return 0;
-          })
+          });
+
+          setIsFetching(false);
         } catch (error) {
-          
+          console.log(error);
         }
       }
 
@@ -61,12 +67,17 @@ export const Home: React.FC = React.memo(
       <div className="home">
         <FeaturedInfo />
 
-        <Chart
-          data={userStats}
-          title="User Analytics"
-          grid
-          dataKey="Active User"
-        />
+        {isFetching
+          ? (<Loader />)
+          : (
+            <Chart
+              data={userStats}
+              title="User Analytics"
+              grid
+              dataKey="Active User"
+            />
+          )
+        }
 
         <div className="homeWidgets">
           <WidgetSm/>
