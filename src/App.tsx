@@ -40,7 +40,6 @@ function App() {
           <Route path="/users" element={<UserList />} />
           <Route path="/user/:userId" element={<User />} />
           <Route path="/newUser" element={<NewUser />} />
-          {/*  */}
         </Route>
         <Route path="/auth/login" element={<Login />} />
         <Route path="*" element={<Error />} />
