@@ -10,8 +10,8 @@ import { Loader } from "../../components/Loader";
 export const ProductList: React.FC = React.memo(
   () => {
     const dispatch = useDispatch();
-    const isFetching = useSelector((state: any) => state.product.isFetching);
-    const products = useSelector((state: any) => state.product.products);
+    const isFetching = useSelector((state: State) => state.product.isFetching);
+    const products = useSelector((state: State) => state.product.products);
     const [paginationModel, setPaginationModel] = useState({
       pageSize: 8,
       page: 0,

@@ -1,5 +1,20 @@
 /// <reference types="react-scripts" />
 
+interface State {
+  user: {
+    currentUser: User | null;
+    isFetching: boolean;
+    error: boolean;
+    users: User[];
+    user: User | null;
+  };
+  product: {
+    products: Product[],
+    isFetching: boolean,
+    error: boolean,
+  }
+}
+
 interface User {
   _id: string;
   username: string;

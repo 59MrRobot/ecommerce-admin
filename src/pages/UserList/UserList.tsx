@@ -9,8 +9,8 @@ import { Loader } from "../../components/Loader";
 
 export const UserList: React.FC = React.memo(
   () => {
-    const users = useSelector((state: any) => state.user.users);
-    const isFetching = useSelector((state: any) => state.user.isFetching);
+    const users = useSelector((state: State) => state.user.users);
+    const isFetching = useSelector((state: State) => state.user.isFetching);
     const [paginationModel, setPaginationModel] = useState({
       pageSize: 8,
       page: 0,
@@ -85,7 +85,7 @@ export const UserList: React.FC = React.memo(
             rows={users}
             disableRowSelectionOnClick
             columns={columns}
-            getRowId={(row: Product) => {
+            getRowId={(row: User) => {
               if (row) {
                 return row._id;
               } else {
