@@ -19,9 +19,11 @@ export const FeaturedInfo: React.FC = React.memo(
           setIsFetching(true);
 
           const response = await userRequest.get("orders/income");
-          const perc = (response.data[1].total) / (response.data[0].total) * 100;
+          console.log(response)
 
-          setLastIncome(response.data[1].total);
+          const perc = response.data.length > 1 ? (response.data[1].total) / (response.data[0].total) * 100 : 100;
+
+          setLastIncome( response.data.length > 1 ? response.data[1].total : response.data[0].total);
           setPercentage(Math.round(perc * 10) / 10);
           setIsFetching(false);
         } catch (error) {

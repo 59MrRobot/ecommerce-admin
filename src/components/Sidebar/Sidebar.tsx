@@ -23,7 +23,7 @@ export const Sidebar: React.FC = React.memo(
             <h3 className="sidebarTitle">Dashboard</h3>
             <ul className="sidebarList">
               <Link to="/" className="link">
-              <li className="sidebarListItem active">
+              <li className="sidebarListItem active sidebarListItem--active">
                 <LineStyleIcon className="sidebarIcon" />
                 Home
               </li>
@@ -42,13 +42,13 @@ export const Sidebar: React.FC = React.memo(
             <h3 className="sidebarTitle">Quick Menu</h3>
             <ul className="sidebarList">
               <Link to="/users" className="link">
-                <li className="sidebarListItem">
+                <li className="sidebarListItem sidebarListItem--active">
                   <PermIdentityIcon className="sidebarIcon" />
                   Users
                 </li>
               </Link>
               <Link to="/products" className="link">
-                <li className="sidebarListItem">
+                <li className="sidebarListItem sidebarListItem--active">
                   <StorefrontIcon className="sidebarIcon" />
                   Products
                 </li>

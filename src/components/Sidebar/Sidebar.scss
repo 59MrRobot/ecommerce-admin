@@ -27,10 +27,19 @@
 
 .sidebarListItem {
   padding: 5px;
-  cursor: pointer;
+  // cursor: pointer;
   display: flex;
   align-items: center;
   border-radius: 10px;
+
+  &--active {
+    cursor: pointer;
+
+    &.active,
+    &:hover {
+      background-color: rgb(240, 240, 255);
+    }
+  }
 }
 
 .sidebarListItem.active,

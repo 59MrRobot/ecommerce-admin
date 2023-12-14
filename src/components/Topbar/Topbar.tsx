@@ -27,7 +27,7 @@ export const Topbar: React.FC = React.memo(
           </div>
 
           <div className="topRight">
-            <div className="topbarIconContainer">
+            <div className="topbarIconContainer topbarIconContainer--active">
               <LogoutIcon onClick={handleClick}/>
             </div>
 
